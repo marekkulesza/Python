@@ -1,0 +1,45 @@
+print("Write how many ml of water the coffee machine has:")
+water = int(input()) # input() 300,500,1550,0,599,200
+print("Write how many ml of milk the coffee machine has:")
+milk = int(input()) # input() 65,250,299,0,250,50
+print("Write how many grams of coffee beans the coffee machine has:")
+beans = int(input()) # input() 100,200,300,0,200,15
+print("Write how many cups of coffee you will need:")
+coffee = int(input()) # input() 1,10,3,1,10,0
+
+minwater = 200
+minmilk = 50
+minbeans = 15
+
+if (water >= 1) and (milk >= 1) and (beans >= 1) and (coffee >= 1):
+
+    choicewater = int(minwater * coffee)
+    choicemilk = int(minmilk * coffee)
+    choicebeans = int(minbeans * coffee)
+
+    x = int((water/choicewater)*coffee)
+    y = int((milk/choicemilk)*coffee)
+    z = int((beans/choicebeans)*coffee)
+
+    lowest = min(x,y,z)
+
+    if lowest == coffee:
+        print("Yes, I can make that amount of coffee") 
+    elif lowest >= coffee:
+        print("Yes, I can make that amount of coffee (and even" , lowest - coffee ,"more than that)")
+    elif lowest <= coffee:
+        print("No, I can only make", lowest ,"cup(s) of coffee")
+
+elif (water >= 0 and milk >= 0 and beans >= 0 and coffee == 0):
+
+
+    x = int(water/minwater)
+    y = int(milk/minmilk)
+    z = int(beans/minbeans)
+
+    lowest = min(x,y,z)
+
+    print("No, I can only make", lowest ,"cup(s) of coffee")
+    
+elif (water == 0 and milk == 0 and beans == 0 and coffee == 0):
+    print("Yes, I can make that amount of coffee")

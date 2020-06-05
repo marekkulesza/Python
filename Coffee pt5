@@ -1,0 +1,137 @@
+supply_water = 400
+supply_milk = 540
+supply_beans = 120
+supply_cups = 9
+money = 550
+
+def print_supply():
+    print("The coffee machine has:")
+    print(supply_water, "of water")
+    print(supply_milk, "of milk")
+    print(supply_beans, "of beans")
+    print(supply_cups, "of disposable cups")
+    print(money, "of money")
+
+def write_action():
+    print("Write action (buy, fill, take, remaining, exit):")
+    choices = ["buy","fill","take","remaining", "exit"]
+    choice = choices.index(input())
+    return choice
+    
+def buy():
+    print("what do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - main menu:")
+
+    drinks = ["","espresso","latte","cappuccino","back"]
+
+    drink_choice = input()
+
+    global supply_water, supply_milk, supply_beans, supply_cups, money
+
+    if drink_choice == "1":
+        if supply_water >= 250 and supply_milk >= 0 and supply_beans >= 16 and supply_cups >= 1:
+            print("I have enough resources, making you a coffee!")
+            supply_water = supply_water - 250
+            supply_milk = supply_milk - 0
+            supply_beans = supply_beans - 16
+            supply_cups = supply_cups - 1
+            money = money + 4
+        else:
+            low_water = ""
+            low_milk = ""
+            low_beans = ""
+            low_cups = ""
+
+            if supply_water < 250:
+                low_water = "water"
+            if supply_milk < 0:
+                low_milk = "milk"
+            if supply_beans < 16:
+                low_beans = "beans"
+            if supply_cups < 1:
+                low_cups = "cups"
+            
+            print("Sorry, not enough",low_water,low_milk,low_beans,low_cups,"!")
+
+    elif drink_choice == "2":
+        if supply_water >= 350 and supply_milk >= 75 and supply_beans >= 20 and supply_cups >= 1:
+            print("I have enough resources, making you a coffee!")
+            supply_water = supply_water - 350
+            supply_milk = supply_milk - 75
+            supply_beans = supply_beans - 20
+            supply_cups = supply_cups - 1
+            money = money + 7
+        else:
+            low_water = ""
+            low_milk = ""
+            low_beans = ""
+            low_cups = ""
+
+            if supply_water < 350:
+                low_water = "water"
+            if supply_milk < 75:
+                low_milk = "milk"
+            if supply_beans < 20:
+                low_beans = "beans"
+            if supply_cups < 1:
+                low_cups = "cups"
+            
+            print("Sorry, not enough",low_water,low_milk,low_beans,low_cups,"!")
+
+    elif drink_choice == "3":
+        if supply_water >= 200 and supply_milk >= 100 and supply_beans >= 12 and supply_cups >= 1:
+            print("I have enough resources, making you a coffee!")
+            supply_water = supply_water - 200
+            supply_milk = supply_milk - 100
+            supply_beans = supply_beans - 12
+            supply_cups = supply_cups - 1
+            money = money + 6
+        else:
+            low_water = ""
+            low_milk = ""
+            low_beans = ""
+            low_cups = ""
+
+            if supply_water < 200:
+                low_water = "water"
+            if supply_milk < 100:
+                low_milk = "milk"
+            if supply_beans < 12:
+                low_beans = "beans"
+            if supply_cups < 1:
+                low_cups = "cups"
+    elif drink_choice == "back":
+        return
+
+def fill():
+    global supply_water, supply_milk, supply_beans, supply_cups, money
+
+    print("Write how many ml of water do you want to add:")
+    supply_water = supply_water + int(input())
+    print("Write how many ml of milk do you want to add:")
+    supply_milk = supply_milk + int(input())
+    print("Write how many grams of coffee beans do you want to add:")
+    supply_beans = supply_beans + int(input())
+    print("Write how many disposable cups of coffee do you want to add:")
+    supply_cups = supply_cups + int(input())
+
+def take():    
+    global supply_water, supply_milk, supply_beans, supply_cups, money
+    print("I gave you", money)
+    money = money - money
+
+def remaining():
+    global supply_water, supply_milk, supply_beans, supply_cups, money
+    print_supply()
+
+while True:
+    choice = write_action()
+    if choice == 0:
+        buy()
+    if choice == 1:
+        fill()
+    if choice == 2:
+       take()
+    if choice == 3:
+       remaining()
+    if choice == 4:
+       break

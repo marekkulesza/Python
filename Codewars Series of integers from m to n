@@ -1,0 +1,10 @@
+def generate_integers(m, n): 
+
+    x = range(m,n+1)
+    numlist = []
+
+    for element in x:
+        numlist.append(element)
+    return numlist
+
+pass

@@ -1,0 +1,36 @@
+#  pip install python-docx
+#  pip install docx2pdf
+
+import docx
+import os
+from docx2pdf import convert
+
+def title_changer():
+    os.getcwd()
+
+    doc = docx.Document('/Users/ayylmbo/Desktop/Python/Python Automation Project/Resume.docx') #  no idea why this worked
+
+    style = doc.styles['Style1'] # to Change how add_run adds text I had to add a new style in word for the doc
+
+    # print(doc.paragraphs[0].text) this prints the text line in paragraph one 
+    # print(doc.paragraphs[1].text)
+    # print(doc.paragraphs[0].runs[1])   this prints the style and code stuff 
+    # print(doc.paragraphs[0].runs[1].text) this prints out the text
+
+    print("What would you like to add next to your name?")
+
+    new_input = input() # What the job title you want 
+    if (len(new_input) > 35): # the job title is greater than 30 characters long, just print out my name
+        pass
+    else:
+        doc.paragraphs[0].add_run("- "+new_input)
+
+    doc.save("Marek_Kulesza.docx")
+
+def doc_pdf():
+    new_doc = docx.Document('/Users/ayylmbo/Desktop/Python/Marek_Kulesza.docx')
+    print(new_doc.paragraphs[0].text)
+    convert(r"C:\Users\ayylmbo\Desktop\Python\Marek_Kulesza.docx", r"C:\Users\ayylmbo\Desktop\Python\ "+(new_doc.paragraphs[0].text)+".pdf")
+
+title_changer()
+doc_pdf()

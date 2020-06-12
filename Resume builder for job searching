@@ -13,7 +13,7 @@ import docx
 import os
 from docx2pdf import convert
 
-job_title = ""
+job_title2 = ""
 
 def title_scrape():
     print("Insert the website address")
@@ -25,9 +25,10 @@ def title_scrape():
 
     keyword = " - " # uses " - " as a seperation for my words and seperates them into 3 lists (before, at " - ", and after)
     after_keyword = title_name2.partition(keyword)
-    global job_title
+    global job_title2
     job_title = after_keyword[0]
-    print(job_title)
+    job_title2 = job_title.title()
+    print(job_title2)
 
 def title_changer():
     os.getcwd()
@@ -38,7 +39,7 @@ def title_changer():
 
     print("")
 
-    new_input = job_title # What the job title you want 
+    new_input = job_title2 # What the job title you want 
     if (len(new_input) > 35): # the job title is greater than 30 characters long, just print out my name
         pass
     else:

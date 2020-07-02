@@ -1,0 +1,291 @@
+yeet = list("_________") # XXXOO__O_ OXXOO__X_ XO_XO_XO_ XO_XO_X__ OX_OX_O__
+
+win_counter = 0
+o_win = 0
+x_win = 0
+
+
+def print_game():
+    print("---------")
+    print("""| {0} {1} {2} |\n| {3} {4} {5} |\n| {6} {7} {8} | """.format(*yeet))
+    print("---------")
+
+def win():
+    
+    global win_counter, o_win, x_win
+
+    win1 = []
+    win2 = []
+    win3 = []
+    win4 = []
+    win5 = []
+    win6 = []
+    win7 = []
+    win8 = []
+
+    for i in yeet[0:3]:
+        win1.append(i)
+        if win1 == ["X", "X", "X"]:
+            x_win += 1
+            win_counter += 1
+        if win1 == ["O", "O", "O"]:
+            o_win += 1
+            win_counter += 1
+
+    for i in yeet[3:6]:
+        win2.append(i)
+        if win2 == ["X", "X", "X"]:
+            x_win += 1
+            win_counter += 1
+        if win2 == ["O", "O", "O"]:
+            o_win += 1
+            win_counter += 1
+
+    for i in yeet[6:9]:
+        win3.append(i)
+        if win3 == ["X", "X", "X"]:
+            x_win += 1
+            win_counter += 1
+        if win3 == ["O", "O", "O"]:
+            o_win += 1
+            win_counter += 1
+
+    for i in yeet[0], yeet[3], yeet[6]:
+        win4.append(i)
+        if win4 == ["X", "X", "X"]:
+            x_win += 1
+            win_counter += 1
+        if win4 == ["O", "O", "O"]:
+            o_win += 1
+            win_counter += 1
+
+    for i in yeet[1], yeet[4], yeet[7]:
+        win5.append(i)
+        if win5 == ["X", "X", "X"]:
+            x_win += 1
+            win_counter += 1
+        if win5 == ["O", "O", "O"]:
+            o_win += 1
+            win_counter += 1
+
+    for i in yeet[2], yeet[5], yeet[8]:
+        win6.append(i)
+        if win6 == ["X", "X", "X"]:
+            x_win += 1
+            win_counter += 1
+        if win6 == ["O", "O", "O"]:
+            o_win += 1
+            win_counter += 1
+
+    for i in yeet[0], yeet[4], yeet[8]:
+        win7.append(i)
+        if win7 == ["X", "X", "X"]:
+            x_win += 1
+            win_counter += 1
+        if win7 == ["O", "O", "O"]:
+            o_win += 1
+            win_counter += 1
+
+    for i in yeet[2], yeet[4], yeet[6]:
+        win8.append(i)
+        if win8 == ["X", "X", "X"]:
+            x_win += 1
+            win_counter += 1
+        if win8 == ["O", "O", "O"]:
+            o_win += 1
+            win_counter += 1
+
+    if win_counter > 1:
+        print("Impossible")
+        return True
+    if x_win > 0:
+        print("X wins")
+        return True
+    if o_win > 0:
+        print("O wins")
+        return True
+
+def impossible():
+
+    x_counter = 0
+    o_counter = 0
+
+    for elements in yeet:
+        if "X" == elements:
+            x_counter += 1
+        if "O" == elements:
+            o_counter += 1
+    if abs(x_counter - o_counter) > 1:
+        print("Impossible")
+        return True
+
+def draw():
+    print("Draw")
+
+def game_not_finished():
+    if "_" in yeet:
+        # print("Game not finished") old code here
+        return True
+    else:
+        return False
+
+def next_move_X():
+
+    print("Enter the coordinates:")
+    new_input_1 = input() # input() here
+    new_input_list = new_input_1.split(" ")
+    
+    for values in new_input_list:
+        if int(values) > 3:
+            print("Coordinates should be from 1 to 3!")
+            return
+
+        if int(values) < 1:
+            print("Coordinates should be from 1 to 3!")
+            return
+
+    new_input = str(new_input_1) 
+
+    for element in yeet:
+
+        if new_input == "1 3" and yeet[0] == "_":
+            yeet[0] = "X"
+            print_game()
+            return False
+
+        if new_input == "2 3" and yeet[1] == "_":
+            yeet[1] = "X"
+            print_game()
+            return False
+
+        if new_input == "3 3" and yeet[2] == "_":
+            yeet[2] = "X"
+            print_game()
+            return False
+
+        if new_input == "1 2" and yeet[3] == "_":
+            yeet[3] = "X"
+            print_game()
+            return False       
+
+        if new_input == "2 2" and yeet[4] == "_":
+            yeet[4] = "X"
+            print_game()
+            return False
+
+        if new_input == "3 2" and yeet[5] == "_":
+            yeet[5] = "X"
+            print_game()
+            return False
+
+        if new_input == "1 1" and yeet[6] == "_":
+            yeet[6] = "X"
+            print_game()
+            return False
+
+        if new_input == "2 1" and yeet[7] == "_":
+            yeet[7] = "X"
+            print_game()
+            return False
+
+        if new_input == "3 1" and yeet[8] == "_":
+            yeet[8] = "X"
+            print_game()
+            return False
+
+        else:
+            print("This cell is occupied! Choose another one!")
+            return
+  
+def next_move_O():
+
+    print("Enter the coordinates:")
+    new_input_1 = input() # input() here
+    new_input_list = new_input_1.split(" ")
+    
+    for values in new_input_list:
+        if int(values) > 3:
+            print("Coordinates should be from 1 to 3!")
+            return
+
+        if int(values) < 1:
+            print("Coordinates should be from 1 to 3!")
+            return
+
+    new_input = str(new_input_1) 
+
+    for element in yeet:
+
+        if new_input == "1 3" and yeet[0] == "_":
+            yeet[0] = "O"
+            print_game()
+            return False
+
+        if new_input == "2 3" and yeet[1] == "_":
+            yeet[1] = "O"
+            print_game()
+            return False
+
+        if new_input == "3 3" and yeet[2] == "_":
+            yeet[2] = "O"
+            print_game()
+            return False
+
+        if new_input == "1 2" and yeet[3] == "_":
+            yeet[3] = "O"
+            print_game()
+            return False       
+
+        if new_input == "2 2" and yeet[4] == "_":
+            yeet[4] = "O"
+            print_game()
+            return False
+
+        if new_input == "3 2" and yeet[5] == "_":
+            yeet[5] = "O"
+            print_game()
+            return False
+
+        if new_input == "1 1" and yeet[6] == "_":
+            yeet[6] = "O"
+            print_game()
+            return False
+
+        if new_input == "2 1" and yeet[7] == "_":
+            yeet[7] = "O"
+            print_game()
+            return False
+
+        if new_input == "3 1" and yeet[8] == "_":
+            yeet[8] = "O"
+            print_game()
+            return False
+
+        else:
+            print("This cell is occupied! Choose another one!")
+            return
+
+while True:
+
+    if impossible() == True:
+        break
+    if win() == True:
+        break
+    if game_not_finished() == True:
+        next_move_X()
+
+    if impossible() == True:
+        break
+    if win() == True:
+        break
+    if game_not_finished() == True:
+        next_move_O()
+    if impossible() == True:
+        break
+    if win() == True:
+        break
+
+
+    if game_not_finished() == False:
+        draw()
+        break

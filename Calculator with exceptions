@@ -1,0 +1,28 @@
+def evaluation_test():
+    while True:
+    
+        expression = input()
+
+        if expression.replace(" ", "") == "":
+            continue
+        if expression == "/exit":
+            print("Bye!")
+            break
+        if expression =="/help":
+            print("The program calculates the given expression")
+            continue            
+
+        if expression[0] == "/":
+            try:
+                eval(expression)
+            except (SyntaxError):
+                print("Unknown command")
+        else:
+            try:
+                eval(expression)
+            except (ValueError, TypeError, NameError, SyntaxError):
+                print("Invalid expression")
+            else:
+                print(eval(expression))
+
+evaluation_test()

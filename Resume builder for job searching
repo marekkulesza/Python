@@ -1,11 +1,12 @@
-#  pip install python-docx
-#  pip install docx2pdf
-#  pip install requests
-#  pip install beautifulsoup4
+# pip install python-docx
+# pip install docx2pdf
+# pip install requests
+# pip install beautifulsoup4
 
 # this program needs a resume template doc
 # there is a keyword bug that can occur in title_scrape
 # if the job title has " - " in it the program will screw up
+# Go in and edit your resume and add beside your name Style1 text then save
 
 import requests
 from bs4 import BeautifulSoup
@@ -13,12 +14,22 @@ import docx
 import os
 from docx2pdf import convert
 
+#### ONLY EDIT THESE ####
+
+your_name = "Marek Kulesza" # Your Name
+resume_path = '/Users/ayylmbo/Desktop/Python/Python Automation Project/Resume.docx' # path to your resume
+job_characters = 35  # How long the job title is before it doesn't add it on
+new_doc_path = '/Users/ayylmbo/Desktop/Python/Python Automation Project/Marek Kulesza.docx' # path to the new doc so that it doesnt overwrite the resume
+pdf_path = '/Users/ayylmbo/Desktop/Resumes/' # path to the completed pdf
+
+#### ONLY EDIT THESE #### 
+
 job_title2 = ""
 
 def title_scrape():
     print("Insert the website address")
     res = requests.get(input())
-    # print(res.text) prints the website
+    # print(res.text) prints the website for debugging
     soup = BeautifulSoup(res.text, 'lxml')
     title_name = soup.select('title')
     title_name2 = (title_name[0].getText())
@@ -32,26 +43,26 @@ def title_scrape():
 
 def title_changer():
     os.getcwd()
-
-    doc = docx.Document('/Users/ayylmbo/Desktop/Python/Python Automation Project/Resume.docx') #  this is the Resume template
-
-    style = doc.styles['Style1'] # to change how add_run adds text I had to add a new style in word for the doc
-
+    doc = docx.Document(resume_path) #  this is your Resume template
     print("")
-
     new_input = job_title2 # What the job title you want 
-    if (len(new_input) > 35): # the job title is greater than 30 characters long, just print out my name
+    if (len(new_input) > job_characters): # the job title is greater than XX characters long, just print out my name
         pass
     else:
-        doc.paragraphs[0].add_run("- "+new_input)
+        doc.paragraphs[0].add_run(" - "+new_input)
 
-    doc.save("Marek_Kulesza.docx") # Saves to a document which later gets turned into a PDF
+    doc.save(new_doc_path) # Saves to a document which later gets turned into a PDF
 
 def doc_pdf():
-    new_doc = docx.Document('/Users/ayylmbo/Desktop/Python/Marek_Kulesza.docx')
+    new_doc = docx.Document(new_doc_path)
     print(new_doc.paragraphs[0].text)
-    convert(r"C:\Users\ayylmbo\Desktop\Python\Marek_Kulesza.docx", r'C:\Users\ayylmbo\Desktop\Resumes\\'+(new_doc.paragraphs[0].text)+".pdf")
+    convert(new_doc_path, pdf_path+(new_doc.paragraphs[0].text)+".pdf")
 
-title_scrape()
-title_changer()
-doc_pdf()
+while True:
+    title_scrape()
+    title_changer()
+    doc_pdf()
+    print("\nComplete, press enter to add another link or type exit")
+    new_input = input()
+    if new_input == "exit":
+        break

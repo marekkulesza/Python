@@ -1,0 +1,18 @@
+# filename: modifyOne.py
+# Wayne Collins, COMP 10001 Programming Fundamentals
+# This program works, it counts from zero to nine.
+# The "\t" in the print statement will print TAB character.
+
+# Exercise: modify this program to make it print the uppercase
+# alphabet A-Z instead of numbers. Keep the while() loop structure
+# and only print one letter at a time in the loop.
+# Hint: read about the chr() and ord() builtin functions in the
+# Reference Library, in the Documentation at www.python.org
+# Also, it may help to look at an ascii table: www.asciitable.com
+
+counter = 65
+# print(ord("A"))
+# print(ord("Z"))
+while counter < 91:
+	print("\t", chr(counter))
+	counter = counter + 1
